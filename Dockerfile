@@ -1,7 +1,7 @@
 FROM openjdk:11-jre-slim
 
-ARG kafka_version=2.8.1
-ARG scala_version=2.13
+ARG kafka_version=2.3.1
+ARG scala_version=2.12
 ARG vcs_ref=unspecified
 ARG build_date=unspecified
 
@@ -53,6 +53,9 @@ RUN set -eux ; \
     rm -rf /var/lib/apt/lists/*
 
 COPY overrides /opt/overrides
+
+ADD jmx/prometheus-jmx-agent-config.yml /usr/app/prometheus-jmx-agent-config.yml
+ADD jmx/jmx_prometheus_javaagent-0.18.0.jar /usr/app/jmx_prometheus_javaagent.jar
 
 VOLUME ["/kafka"]
 
